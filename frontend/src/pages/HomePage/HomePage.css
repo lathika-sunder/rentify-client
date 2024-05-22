@@ -1,0 +1,26 @@
+.hero-container{
+    background-image: url('../../assets/images/banner.png');
+    height: 60vh;
+    width: 185vh;
+    margin: 5vh;
+    padding: 5vh;
+    display: flex;
+    /* align-items: flex-end; */
+    flex-direction: column;
+   
+}
+
+.hero-text h1{
+    font-size: 7vh;
+    /* color: rgba(0, 0, 0, 0.783); */
+    line-height: 10vh;
+    width: 60%;
+    font-weight: 800;
+}
+
+.hero-text p{
+    font-size: 90%;
+    width: 50%;
+    line-height: 2;
+}
+
