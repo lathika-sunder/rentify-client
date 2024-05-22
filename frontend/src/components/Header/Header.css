@@ -1,4 +1,22 @@
-.logo-img{
-    height: 10%;
-    width: 12%;
+.logo-img {
+  height: 10%;
+  width: 12%;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-content ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  align-items: baseline;
+  margin-right: 2vh;
+  
+  li {
+    text-transform: capitalize;
+    margin-left: 5vh;
+    margin-right: 5vh;
+  }
 }

@@ -4,7 +4,15 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
 import "./HomePage.css";
+import { Button } from "@mui/material";
+import { FaSearch } from "react-icons/fa";
+import { Link } from "react-router-dom";
 const HomePage = () => {
+
+  const iconStyle={
+    paddingLeft:"3vh"
+
+  }
   const cities = [
     "Mumbai",
     "Delhi",
@@ -19,10 +27,8 @@ const HomePage = () => {
   ];
 
   return (
-    <div>
-      <div className="">
-        <Header />
-      </div>
+    <div className="home-page">
+      
       <div className="">
         <div className="hero-container">
           <div className="hero-text">
@@ -38,7 +44,41 @@ const HomePage = () => {
               options={cities}
               sx={{ width: 300 }}
               renderInput={(params) => <TextField {...params} label="Cities" />}
+              
             />
+            <Autocomplete
+              id="combo-box-demo"
+              options={cities}
+              sx={{ width: 300 }}
+              renderInput={(params) => <TextField {...params} label="Property Type" />}
+              
+            />
+          </div>
+          <div className="buttons">
+            <button className="btn-primary">Find Now    <FaSearch style={iconStyle}/></button>
+          </div>
+
+          
+        </div>
+        <div className="recent-properties">
+          <h1>Recently Added</h1>
+          <div className="cards-container">
+            <div className="card">
+              <div className="card-image"></div>
+              <div className="card-text">
+                <h2>Buy</h2>
+                <p>Buy your dream home with us</p>
+                <Link to="/buy">Learn More</Link>
+              </div>
+            </div>
+            <div className="card">
+              <div className="card-image"></div>
+              <div className="card-text">
+                <h2>Buy</h2>
+                <p>Buy your dream home with us</p>
+                <Link to="/buy">Learn More</Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

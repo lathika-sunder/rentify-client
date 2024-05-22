@@ -9,3 +9,27 @@
 *{
   font-family: 'Lufga', sans-serif;
 }
+body{
+  margin: 5vh;
+}
+
+.btn-primary{
+  background-color: var(--secondary-color);
+  padding: 2vh;
+  border: none;
+  border-radius: 1vh;
+  font-weight: bolder;
+  align-items: baseline;
+  color: rgba(255, 255, 255, 0.902);
+  cursor: pointer;
+}
+.btn-primary:hover{
+  
+    transition: 0.1s ease-in-out;
+    background-color: #1A9BE6;
+    color: white;
+  
+}
+.buttons{
+  margin-top: 3vh;
+}
