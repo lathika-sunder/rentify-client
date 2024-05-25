@@ -1,0 +1,67 @@
+.signup-login-conatiner{
+  height: 100%;
+  padding: 0vh;
+}
+
+.input-group{
+    display: flex;
+    flex-direction: row;
+}
+  .signup-form{
+    height: max-content;
+  }
+  .btn{
+    display: flex;justify-content: center;align-items: center;;
+  }
+
+  .signup-form .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  .signup-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555555;
+  }
+  
+  .signup-form input {
+    width: 100%;
+    padding: 1vh;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  .signup-form{
+    height: max-content;
+
+    .btn{
+      .btn-primary{
+        width: 100%;
+        margin: 2vh 0vh 2vh 0vh;
+      }
+    }
+  }
+  
+  .signup-form input:focus {
+    border-color: #007BFF;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+  }
+  
+  .radio-group {
+    display: flex;
+    
+    align-items: flex-start;
+    margin-top: 10px;
+  }
+  
+  .radio-group label {
+    color: #555555;
+  }
+  
+  .radio-group input {
+    margin-right: 5px;
+  }
+ 
+  
