@@ -1,0 +1,103 @@
+
+.seller-dashboard {
+  font-family: 'Arial', sans-serif;
+  padding: 20px;
+  /* background-color: #f0f2f5; */
+  color: #333;
+}
+
+.seller-dashboard h1 {
+  margin-bottom: 30px;
+  color: #444;
+  font-size: 2rem;
+}
+
+.seller-dashboard .title{
+  justify-content: space-between;
+}
+
+.seller-dashboard .row {
+  display: flex;
+  flex-wrap: wrap;
+  
+  gap: 20px;
+
+ 
+}
+
+
+
+.seller-dashboard .column {
+  
+  border: 1px solid #ddd;
+  padding: 2vh;
+  flex: 1;
+  flex-wrap: wrap;
+  min-width: 300px;
+}.seller-dashboard{
+  
+.my-listing-item span{
+  background-color: rgba(0, 110, 255, 0.226);
+  
+  padding: 1vh;
+  border-radius:1vh ;
+}
+
+.property-enquiry-item, .my-listing-item {
+padding-bottom: 2vh;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.my-listings .box-heading, .property-enquiries .box-heading{
+  justify-content: space-between;
+  svg{
+    height: 10vh;
+    color: grey;
+  }
+}
+
+.property-enquiry-item h3, .my-listing-item h3 {
+  margin-top: 0;
+  color: #007bff;
+}
+
+.property-enquiry-item p, .my-listing-item p {
+  margin: 5px 0;
+  color: #333333d3;
+  font-size: small;
+}
+
+h2 {
+  color: #555;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.sell-now-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.sell-now-container .btn-primary {
+  width: 100%;
+  max-width: 200px;
+}
+
+}

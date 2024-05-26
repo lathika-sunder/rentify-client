@@ -16,11 +16,9 @@ const Header = () => {
       <div className="header-content">
         <ul>
           <li>
-            <FaHome style={iconStyle} />
+           <Link to="/"> <FaHome style={iconStyle} /></Link>
           </li>
-          <li>
-            <FaPhone style={iconStyle} />
-          </li>
+          
           <IsLoggedIn>
             <Link to="/">
               <button className="btn-primary">Log Out</button>

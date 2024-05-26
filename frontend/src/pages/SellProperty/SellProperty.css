@@ -3,7 +3,8 @@
     justify-content: center;
     align-items: center;
 }
-
+.sell-property{
+  
 .sell-property-container {
   display: flex;
   justify-content: space-evenly;
@@ -72,7 +73,8 @@
 
 .sell-property-form input[type="file"]
 {
-    width: 28vh;
+    width: 24vh;
+
 }
 
 .sell-property-form input:focus,textarea:focus,select:focus {
@@ -94,4 +96,6 @@ padding: 5vh;
 .row {
   display: flex;
   flex-direction: row;
+}
+
 }

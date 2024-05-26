@@ -5,7 +5,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 
 import "./HomePage.css";
 import { Button } from "@mui/material";
-import { FaSearch } from "react-icons/fa";
+import { FaBath, FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 const HomePage = () => {
 
@@ -24,6 +24,33 @@ const HomePage = () => {
     "Ahmedabad",
     "Jaipur",
     "Lucknow",
+  ];
+
+  const listings = [
+    {
+      id: 1,
+      title: "Luxury Villa",
+      type: "Villa",
+      area: 350,
+      bedrooms: 4,
+      bathrooms: 3,
+      amenities: ["Swimming Pool", "Parking", "Wi-Fi"],
+      description: "A luxurious villa with modern amenities.",
+      contact: "John Doe",
+      contactNumber: "1234567890",
+    },
+    {
+      id: 2,
+      title: "Residential Apartment",
+      type: "Residential",
+      area: 120,
+      bedrooms: 2,
+      bathrooms: 1,
+      amenities: ["Wi-Fi", "Parking"],
+      description: "A cozy apartment in a great location.",
+      contact: "Jane Smith",
+      contactNumber: "0987654321",
+    },
   ];
 
   return (
@@ -63,22 +90,37 @@ const HomePage = () => {
         <div className="recent-properties">
           <h1>Recently Added</h1>
           <div className="cards-container">
-            <div className="card">
-              <div className="card-image"></div>
-              <div className="card-text">
-                <h2>Buy</h2>
-                <p>Buy your dream home with us</p>
-                <Link to="/buy">Learn More</Link>
+            
+            {listings.map((listing) => (
+              <div key={listing.id} className="card">
+                <h3>{listing.title}</h3>
+                <div className="row">
+                  <p>
+                    {" "}
+                    <span>{listing.type}</span>
+                  </p>
+                  <p>
+                    {" "}
+                    <span>{listing.area} sqm</span>
+                  </p>
+                  <p>
+                    <span>{listing.bedrooms}bhk</span>
+                  </p>
+                  <p>
+                    <span>
+                      {listing.bathrooms} <FaBath />
+                    </span>
+                  </p>
+                </div>
+
+                <p> {listing.amenities.join(" | ")}</p>
+
+                <div className="row">
+                  <p>{listing.contact}</p>
+                  <p> {listing.contactNumber}</p>
+                </div>
               </div>
-            </div>
-            <div className="card">
-              <div className="card-image"></div>
-              <div className="card-text">
-                <h2>Buy</h2>
-                <p>Buy your dream home with us</p>
-                <Link to="/buy">Learn More</Link>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

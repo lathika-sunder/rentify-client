@@ -6,6 +6,7 @@ import { AuthProvider } from "./components/LoginHelper/Authprovider";
 import Header from "./components/Header/Header";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SellProperty from "./pages/SellProperty/SellProperty";
+import SellerDashboard from "./pages/SellerDashboard/SellerDashboard";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
         <Routes>
           <Route exact path="/" element={<HomePage />} />
           <Route exact path="/login" element={<LoginPage />} />
-          <Route exact path="/sell-property" element={<SellProperty/>}/ >
+          <Route exact path="/sell-property" element={<SellProperty />} />
+          <Route exact path="/dashboard/seller" element={<SellerDashboard />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
