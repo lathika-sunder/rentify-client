@@ -1,0 +1,97 @@
+.sell-property{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sell-property-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 5vh;
+  height: 82h;
+  width: max-content;
+  box-shadow: 0vh 2px 15px rgba(0, 0, 0, 0.1);
+  font-family: "Lufga", sans-serif;
+
+  .hero-content {
+    display: flex;
+    justify-content: center;
+    height: 80vh;
+
+    h1 {
+      font-size: 2.5rem;
+      display: flex;
+      align-items: flex-end;
+    }
+    span {
+      color: var(--secondary-color);
+    }
+    .hero-img {
+      margin: 2.5vh;
+      height: 75vh;
+      border-radius: 5vh;
+    }
+  }
+
+  .sell-property-form {
+    display: flex;
+    height: 70vh;
+    flex-direction: column;
+    margin-left: 5vh;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 2vh rgba(0, 0, 0, 0.37);
+
+  }
+
+  .amenities {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.sell-property-form .form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.sell-property-form label {
+  font-size: 2vh;
+  display: block;
+  color: #555555;
+}
+
+.sell-property-form input,textarea,select {
+ 
+  padding: 1vh;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.sell-property-form input[type="file"]
+{
+    width: 28vh;
+}
+
+.sell-property-form input:focus,textarea:focus,select:focus {
+  border-color: var(--secondary-color);
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+.column{
+    margin-right: 3vh;
+}
+
+.sell-property-form {
+  display: flex;
+  flex-direction: column;
+padding: 5vh;
+  /* align-items: center; */
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
