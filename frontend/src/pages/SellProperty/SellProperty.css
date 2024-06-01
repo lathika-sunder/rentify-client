@@ -12,13 +12,12 @@
   border-radius: 5vh;
   height: 82h;
   width: max-content;
-  box-shadow: 0vh 2px 15px rgba(0, 0, 0, 0.1);
   font-family: "Lufga", sans-serif;
 
   .hero-content {
     display: flex;
     justify-content: center;
-    height: 80vh;
+    height:95vh;
 
     h1 {
       font-size: 2.5rem;

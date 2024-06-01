@@ -8,7 +8,7 @@ const LoginPage = () => {
   return (
     <div className="form-container">
       <div className="form-content">
-        <img classname="form-img" height={"60vh"} src={banner}></img>
+        <img className="form-img" height={"60vh"} src={banner}></img>
         <div className="form">
           {!signup ? (
             <div className="">

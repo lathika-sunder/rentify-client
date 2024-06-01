@@ -2,17 +2,46 @@ import React from "react";
 import Header from "../../components/Header/Header";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import { FaBath, FaSearch } from "react-icons/fa";
+import { useQuery } from "react-query";
+import axios from "axios";
 
 import "./HomePage.css";
-import { Button } from "@mui/material";
-import { FaBath, FaSearch } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import PreLoader from "../../components/PreLoader/PreLoader";
+
 const HomePage = () => {
+  const iconStyle = {
+    paddingLeft: "3vh",
+  };
 
-  const iconStyle={
-    paddingLeft:"3vh"
+  // React Query: Fetch listings data
+  const {
+    data: listings,
+    isLoading,
+    isError,
+  } = useQuery("listings", async () => {
+    const response = await axios.get(
+      "http://localhost:4040/api/v1/rentify/listings/getListings"
+    );
+    return response.data;
+  });
 
-  }
+  const storeLike = async (listingId) => {
+    try {
+      await axios.post(
+        "http://localhost:4040/api/v1/rentify/listings/postLike",
+        { listingId },
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
+      console.log("Liked successfully!");
+    } catch (error) {
+      console.error("Error liking the listing:", error);
+    }
+  };
   const cities = [
     "Mumbai",
     "Delhi",
@@ -26,43 +55,19 @@ const HomePage = () => {
     "Lucknow",
   ];
 
-  const listings = [
-    {
-      id: 1,
-      title: "Luxury Villa",
-      type: "Villa",
-      area: 350,
-      bedrooms: 4,
-      bathrooms: 3,
-      amenities: ["Swimming Pool", "Parking", "Wi-Fi"],
-      description: "A luxurious villa with modern amenities.",
-      contact: "John Doe",
-      contactNumber: "1234567890",
-    },
-    {
-      id: 2,
-      title: "Residential Apartment",
-      type: "Residential",
-      area: 120,
-      bedrooms: 2,
-      bathrooms: 1,
-      amenities: ["Wi-Fi", "Parking"],
-      description: "A cozy apartment in a great location.",
-      contact: "Jane Smith",
-      contactNumber: "0987654321",
-    },
-  ];
+  if (isLoading) return <PreLoader />;
+
+  if (isError) return <p>Error fetching listings...</p>;
 
   return (
     <div className="home-page">
-      
       <div className="">
         <div className="hero-container">
           <div className="hero-text">
             <h1>One stop for renting a perfect property</h1>
             <p>
-              Find your perfect property in your budget . We are leading real
-              estate agents. Pick the right choice with us
+              Find your perfect property in your budget. We are leading real
+              estate agents. Pick the right choice with us.
             </p>
           </div>
           <div className="search-container">
@@ -71,40 +76,39 @@ const HomePage = () => {
               options={cities}
               sx={{ width: 300 }}
               renderInput={(params) => <TextField {...params} label="Cities" />}
-              
             />
             <Autocomplete
               id="combo-box-demo"
-              options={cities}
+              options={["Residential", "Commercial"]}
               sx={{ width: 300 }}
-              renderInput={(params) => <TextField {...params} label="Property Type" />}
-              
+              renderInput={(params) => (
+                <TextField {...params} label="Property Type" />
+              )}
             />
           </div>
           <div className="buttons">
-            <button className="btn-primary">Find Now    <FaSearch style={iconStyle}/></button>
+            <button className="btn-primary">
+              Find Now <FaSearch style={iconStyle} />
+            </button>
           </div>
-
-          
         </div>
         <div className="recent-properties">
           <h1>Recently Added</h1>
           <div className="cards-container">
-            
             {listings.map((listing) => (
-              <div key={listing.id} className="card">
+              <div key={listing._id} className="card">
+                
+                <div className="">
                 <h3>{listing.title}</h3>
                 <div className="row">
                   <p>
-                    {" "}
                     <span>{listing.type}</span>
                   </p>
                   <p>
-                    {" "}
                     <span>{listing.area} sqm</span>
                   </p>
                   <p>
-                    <span>{listing.bedrooms}bhk</span>
+                    <span>{listing.bedrooms} bhk</span>
                   </p>
                   <p>
                     <span>
@@ -118,6 +122,15 @@ const HomePage = () => {
                 <div className="row">
                   <p>{listing.contact}</p>
                   <p> {listing.contactNumber}</p>
+                </div>
+                </div>
+                <div className="btn">
+                  <button
+                    className="btn-primary"
+                    onClick={()=>storeLike(listing._id)}
+                  >
+                    I'm Interested
+                  </button>
                 </div>
               </div>
             ))}
