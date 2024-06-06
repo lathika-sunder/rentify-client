@@ -1,9 +1,12 @@
 .sell-property{
-    display: flex;
+   
     justify-content: center;
     height: 100%;
-    margin-top: 8vh;
     align-items: center;
+    z-index: 9;
+    
+    background-color: rgba(170, 230, 255, 0.397);
+   
 }
 
 
@@ -12,10 +15,17 @@
   .form-group input,select,textarea{
     width: 30vh;
   }
+.title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
+}
   
 .sell-property-container {
  display: flex;
+ justify-content: center;
+
 
 
   .hero-content {
@@ -34,7 +44,7 @@
     .hero-img {
       margin-left: 2vh;
     
-      height: 70vh;
+      height: 75vh;
       border-radius: 5vh;
     }
   }
@@ -42,7 +52,7 @@
   .sell-property-form {
     display: flex;
     
-    height: 60vh;
+    /* height: 60vh; */
     flex-direction: column;
     margin-left: 5vh;
     justify-content: center;

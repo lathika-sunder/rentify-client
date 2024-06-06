@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { MdElevator } from "react-icons/md";
 import { toast, ToastContainer } from "react-toastify";
+import { RoughNotation } from "react-rough-notation";
 
 const SellProperty = () => {
   const [propertyData, setPropertyData] = useState({
@@ -99,8 +100,13 @@ const SellProperty = () => {
   return (
     <div className="sell-property">
       <ToastContainer />
+      <div className="title">
+      <h1>Sell <RoughNotation show={true} ><span style={{color:"var(--secondary-color)"}}>Now</span></RoughNotation></h1>
+      </div>
       <div className="sell-property-container">
+        
         <div className="hero-content">
+
           <img className="hero-img" src={banner} alt="Banner" />
         </div>
         <form className="sell-property-form" onSubmit={handleSubmit}>
