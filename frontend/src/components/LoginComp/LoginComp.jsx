@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 const LoginComp = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -17,26 +17,29 @@ const LoginComp = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:4040/api/v1/rentify/users/loginUser', loginData);
-      console.log('Login successful:', response.data);
-      alert("Login Successful");
+      const response = await axios.post(
+        "http://localhost:4040/api/v1/rentify/users/loginUser",
+        loginData
+      );
+       toast.success("Login Successful");
 
-      const userRole=response.data.user.role
-      localStorage.setItem("role",response.data.user.role)
-      localStorage.setItem("token",response.data.token)
-      
-      if (userRole === 'buyer') {
-        navigate('/');
-      } else if (userRole === 'seller') {
-        navigate('/dashboard/seller');
+      const userRole = response.data.user.role;
+      localStorage.setItem("role", response.data.user.role);
+      localStorage.setItem("token", response.data.token);
+
+      if (userRole === "buyer") {
+        navigate("/");
+      } else if (userRole === "seller") {
+        navigate("/dashboard/seller");
       }
     } catch (error) {
-      console.error('There was an error logging in!', error);
+      console.error("There was an error logging in!", error);
     }
   };
 
   return (
     <div className="signup-login-container">
+      <ToastContainer />
       <form onSubmit={handleSubmit} className="login-form">
         <div className="form-group">
           <label>Email:</label>
@@ -56,7 +59,9 @@ const LoginComp = () => {
             required
           />
         </div>
-        <button type="submit" className="btn-primary">Login</button>
+        <button type="submit" className="btn-primary">
+          Login
+        </button>
       </form>
     </div>
   );

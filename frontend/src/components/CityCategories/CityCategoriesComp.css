@@ -1,0 +1,44 @@
+.city-categories {
+  height: 70vh;
+  z-index: 9;
+  margin: 10vh;
+  padding: 1vh;
+  box-shadow: 0.2vh 0.2vh 01vh 0vh;
+  background-color: rgb(170, 230, 255);
+
+  .content {
+    width: 100%;
+    color: black;
+    z-index: 999;
+  }
+  .city-card {
+    padding-left: 15vh;
+    border: solid 0.1vh grey;
+    padding-right: 15vh;
+    margin: 1vh;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  .city-card img {
+    height: 18vh;
+    width: 22vh;
+  }
+
+  .cards-container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.row {
+  display: flex;
+}
+
+.banner-img {
+  height: 71vh;
+  padding-left: 20vh;
+}

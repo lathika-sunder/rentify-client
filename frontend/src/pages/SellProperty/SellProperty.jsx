@@ -7,9 +7,12 @@ import {
   FaCouch,
   FaTree,
 } from "react-icons/fa";
-import banner from "../../assets/images/banner2.jpg";
+import banner from "../../assets/images/client.png";
+import "react-toastify/dist/ReactToastify.css";
+
 import axios from "axios";
 import { MdElevator } from "react-icons/md";
+import { toast, ToastContainer } from "react-toastify";
 
 const SellProperty = () => {
   const [propertyData, setPropertyData] = useState({
@@ -17,6 +20,7 @@ const SellProperty = () => {
     type: "villa",
     image: null,
     area: "",
+    address: "",
     bedrooms: "",
     bathrooms: "",
     amenities: {
@@ -28,136 +32,82 @@ const SellProperty = () => {
       lift: false,
     },
     description: "",
-    price:"",
+    price: "",
     contactNumber: "",
     contactPerson: "",
   });
 
-  const handleTitleChange = (event) => {
-    setPropertyData({ ...propertyData, title: event.target.value });
-  };
-
-  const handleTypeChange = (event) => {
-    setPropertyData({ ...propertyData, type: event.target.value });
+  const handleChange = (event) => {
+    const { name, value, type, checked } = event.target;
+    if (type === "checkbox") {
+      setPropertyData((prevData) => ({
+        ...prevData,
+        amenities: {
+          ...prevData.amenities,
+          [name]: checked,
+        },
+      }));
+    } else {
+      setPropertyData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleImageChange = (event) => {
     setPropertyData({ ...propertyData, image: event.target.files[0] });
   };
 
-  const handleAreaChange = (event) => {
-    setPropertyData({ ...propertyData, area: event.target.value });
-  };
-
-  const handleBedroomsChange = (event) => {
-    setPropertyData({ ...propertyData, bedrooms: event.target.value });
-  };
-
-  const handleBathroomsChange = (event) => {
-    setPropertyData({ ...propertyData, bathrooms: event.target.value });
-  };
-  const handleAddressChange=(event)=>{
-    setPropertyData({...propertyData,address:event.target.value})
-  }
-  const handleAmenitiesChange = (event) => {
-    const { name, checked } = event.target;
-    setPropertyData((prevData) => ({
-      ...prevData,
-      amenities: {
-        ...prevData.amenities,
-        [name]: checked,
-      },
-    }));
-  };
-
-  const handleDescriptionChange = (event) => {
-    setPropertyData({ ...propertyData, description: event.target.value });
-  };
-
-  const handleContactNumberChange = (event) => {
-    setPropertyData({ ...propertyData, contactNumber: event.target.value });
-  };
-
-  const handleContactPersonChange = (event) => {
-    setPropertyData({ ...propertyData, contactPerson: event.target.value });
-  };
-
-  const handlePriceChange=(event)=>{
-    setPropertyData({ ...propertyData, price: event.target.value });
-  }
-
-  
-
   const handleSubmit = async (event) => {
-    console.log(formData)
     event.preventDefault();
 
-    const formData = {
-      title:propertyData.title,
-      type:propertyData.type,
-      area:propertyData.area,
-      address:propertyData.address,
-      bedrooms:propertyData.bedrooms,
-      bathrooms:propertyData.bathrooms,
-      amenities:propertyData.amenities[0],
-      description:propertyData.description,
-      price:propertyData.price,
-      contactNumber:propertyData.contactNumber,
-      contact:propertyData.contactPerson,
-    }
-  
-    console.log(formData)
+    const formData = new FormData();
+    formData.append("title", propertyData.title);
+    formData.append("type", propertyData.type);
+    formData.append("area", propertyData.area);
+    formData.append("address", propertyData.address);
+    formData.append("bedrooms", propertyData.bedrooms);
+    formData.append("bathrooms", propertyData.bathrooms);
+    formData.append("amenities", propertyData.amenities);
+    formData.append("image", propertyData.image);
+    formData.append("description", propertyData.description);
+    formData.append("price", propertyData.price);
+    formData.append("contact", propertyData.contactPerson);
+    formData.append("contactNumber", propertyData.contactNumber);
+
     try {
       const response = await axios.post(
         "http://localhost:4040/api/v1/rentify/listings/postListing",
         formData,
         {
           headers: {
-            Authorization: localStorage.getItem("token")
+            Authorization: localStorage.getItem("token"),
+            "Content-Type": "multipart/form-data",
           },
         }
       );
 
-      // Handle success (redirect, toast message, etc.)
       console.log("Listing submitted successfully!", response.data);
 
-      alert("Listng submission succesful")
-      setPropertyData({
-        title: "",
-        type: "villa",
-        image: null,
-        area: "",
-        address:"",
-        bedrooms: "",
-        bathrooms: "",
-        price:"",
-        amenities: {
-          swimmingPool: false,
-          parking: false,
-          wifi: false,
-          garden: false,
-          lift: false,
-        },
-        description: "",
-        contactNumber: "",
-        contactPerson: "",
-      });
+      toast.success("Listing submission successful");
     } catch (error) {
-      console.error("Error submitting listing:",error.response.data.error);
-      // Handle error (toast message, etc.)
+      console.error("Error submitting listing:", error.response.data.error);
     }
   };
 
   return (
     <div className="sell-property">
+      <ToastContainer />
       <div className="sell-property-container">
         <div className="hero-content">
           <img className="hero-img" src={banner} alt="Banner" />
         </div>
         <form className="sell-property-form" onSubmit={handleSubmit}>
           <div className="row">
+          <div className="column">
             <div className="form-group">
-              <div className="column">
+             
                 <label>
                   <p>Property Title</p>
                 </label>
@@ -165,7 +115,7 @@ const SellProperty = () => {
                   type="text"
                   name="title"
                   value={propertyData.title}
-                  onChange={handleTitleChange}
+                  onChange={handleChange}
                 />
               </div>
               <div className="form-group">
@@ -175,26 +125,28 @@ const SellProperty = () => {
                 <select
                   name="type"
                   value={propertyData.type}
-                  onChange={handleTypeChange}
+                  onChange={handleChange}
                 >
                   <option value="villa">Villa</option>
                   <option value="residential">Residential</option>
                   <option value="gated-community">Gated Community</option>
                   <option value="individual-house">Individual House</option>
                   <option value="flats">Flats</option>
-                  <option value="flats">Commercial</option>
+                  <option value="commercial">Commercial</option>
                 </select>
               </div>
               <div className="form-group">
                 <label>
-                  <p>Image</p>
+                  <p>Address</p>
                 </label>
                 <input
-                  type="file"
-                  name="image"
-                  onChange={handleImageChange}
+                  type="text"
+                  name="address"
+                  value={propertyData.address}
+                  onChange={handleChange}
                 />
               </div>
+              
               <div className="form-group">
                 <label>
                   <p>Area (sqm)</p>
@@ -203,20 +155,23 @@ const SellProperty = () => {
                   type="number"
                   name="area"
                   value={propertyData.area}
-                  onChange={handleAreaChange}
+                  onChange={handleChange}
                 />
               </div>
               <div className="form-group">
                 <label>
-                  <p>Address</p>
+                  <p>Price</p>
                 </label>
                 <input
-                  type="text"
-                  name="area"
-                  value={propertyData.address}
-                  onChange={handleAddressChange}
+                  type="number"
+                  name="price"
+                  value={propertyData.price}
+                  onChange={handleChange}
                 />
               </div>
+             </div>
+             <div className="column">
+             
               <div className="form-group">
                 <label>
                   <p>No of Bedrooms</p>
@@ -225,7 +180,7 @@ const SellProperty = () => {
                   type="number"
                   name="bedrooms"
                   value={propertyData.bedrooms}
-                  onChange={handleBedroomsChange}
+                  onChange={handleChange}
                 />
               </div>
               <div className="form-group">
@@ -236,11 +191,10 @@ const SellProperty = () => {
                   type="number"
                   name="bathrooms"
                   value={propertyData.bathrooms}
-                  onChange={handleBathroomsChange}
+                  onChange={handleChange}
                 />
               </div>
-            </div>
-            <div className="column">
+            
               <div className="form-group">
                 <label>
                   <p>Amenities</p>
@@ -251,7 +205,7 @@ const SellProperty = () => {
                       type="checkbox"
                       name="swimmingPool"
                       checked={propertyData.amenities.swimmingPool}
-                      onChange={handleAmenitiesChange}
+                      onChange={handleChange}
                     />
                     <FaSwimmingPool /> Swimming Pool
                   </label>
@@ -260,7 +214,7 @@ const SellProperty = () => {
                       type="checkbox"
                       name="parking"
                       checked={propertyData.amenities.parking}
-                      onChange={handleAmenitiesChange}
+                      onChange={handleChange}
                     />
                     <FaParking /> Parking
                   </label>
@@ -269,17 +223,16 @@ const SellProperty = () => {
                       type="checkbox"
                       name="wifi"
                       checked={propertyData.amenities.wifi}
-                      onChange={handleAmenitiesChange}
+                      onChange={handleChange}
                     />
                     <FaWifi /> Wi-Fi
                   </label>
-                 
                   <label>
                     <input
                       type="checkbox"
                       name="garden"
                       checked={propertyData.amenities.garden}
-                      onChange={handleAmenitiesChange}
+                      onChange={handleChange}
                     />
                     <FaTree /> Garden
                   </label>
@@ -288,46 +241,12 @@ const SellProperty = () => {
                       type="checkbox"
                       name="lift"
                       checked={propertyData.amenities.lift}
-                      onChange={handleAmenitiesChange}
+                      onChange={handleChange}
                     />
                     <MdElevator /> Lift
                   </label>
                 </div>
-              </div>
-              <div className="form-group">
-                <label>
-                  <p>House Description</p>
-                </label>
-                <textarea
-                  rows="6.8"
-                  style={{height:"17.5vh"}}
-                  
-                  name="description"
-                  value={propertyData.description}
-                  onChange={handleDescriptionChange}
-                ></textarea>
-              </div>
-              <div className="form-group">
-                <label>
-                  <p>Price</p>
-                </label>
-                <input
-                  type="number"
-                  name="area"
-                  value={propertyData.price}
-                  onChange={handlePriceChange}
-                />
-              </div>
-              <div className="form-group">
-                <label>
-                  <p>Contact Number</p>
-                </label>
-                <input
-                  type="tel"
-                  name="contactNumber"
-                  value={propertyData.contactNumber}
-                  onChange={handleContactNumberChange}
-                />
+                
               </div>
               <div className="form-group">
                 <label>
@@ -337,12 +256,53 @@ const SellProperty = () => {
                   type="text"
                   name="contactPerson"
                   value={propertyData.contactPerson}
-                  onChange={handleContactPersonChange}
+                  onChange={handleChange}
+                />
+              </div>
+             </div>
+             <div className="column">
+              <div className="form-group">
+                <label>
+                  <p>House Description</p>
+                </label>
+                <textarea
+                  rows="6.8"
+                  style={{ height: "17.5vh" }}
+                  name="description"
+                  value={propertyData.description}
+                  onChange={handleChange}
+                ></textarea>
+              </div>
+              
+             
+              <div className="form-group">
+                <label>
+                  <p>Contact Number</p>
+                </label>
+                <input
+                  type="tel"
+                  name="contactNumber"
+                  value={propertyData.contactNumber}
+                  onChange={handleChange}
+                />
+              </div>
+              
+              <div className="form-group">
+                <label>
+                  <p>Image</p>
+                </label>
+                <span></span>
+                <input
+                className="img-input"
+                  type="file"
+                  name="image"
+                  accept=".jpg, .jpeg, .png"
+                  onChange={handleImageChange}
                 />
               </div>
             </div>
           </div>
-          <div className="btn">
+          <div className="button">
             <button type="submit" className="btn-primary">
               Submit
             </button>

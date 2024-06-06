@@ -5,6 +5,7 @@
 .header{
     display: flex;
     justify-content: space-between;
+    background-color: white;
 }
 
 .header-content ul {
@@ -12,11 +13,11 @@
   flex-direction: row;
   list-style: none;
   align-items: baseline;
-  margin-right: 2vh;
+  
   
   li {
     text-transform: capitalize;
-    margin-left: 5vh;
+    
     margin-right: 5vh;
   }
 }

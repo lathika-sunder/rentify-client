@@ -1,0 +1,26 @@
+.footer {
+    background-color: var(--secondary-color);
+    color: var(--tertiary-color);
+    line-height: 2;
+    p{
+        color: var(--tertiary-color);
+        line-height: 2.4;
+        font-size: x-small;
+    }
+    padding: 24px 0;
+    margin-top: 40px;
+  }
+  
+  .footer-text {
+    margin-top: 20px;
+  }
+  
+  .social-icons {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .social-icons a {
+    font-size: 24px;
+  }
+  

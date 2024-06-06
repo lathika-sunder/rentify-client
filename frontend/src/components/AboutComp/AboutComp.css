@@ -1,0 +1,19 @@
+.about {
+  height: 50vh;
+  padding: 10vh;
+  background-color: rgb(255, 255, 255);
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+  }
+  .text-container {
+    width: 80vh;
+    
+    p {
+      line-height: 2;
+      font-style: italic;
+      
+    }
+  }
+}
